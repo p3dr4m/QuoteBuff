@@ -6,21 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.project.quotebuff.MainActivity">
 
-    <Button
-        android:id="@+id/getBtn"
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="Get WebService" />
-
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/getBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Result ..."
-        android:textSize="17sp" />
+        android:id="@+id/quotes_list">
+    </ListView>
 </RelativeLayout>
