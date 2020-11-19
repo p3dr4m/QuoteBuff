@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuoteBuff">
         <activity
-            android:name=".activities.SavedQuotes"
+            android:name=".ui.SavedQuotes"
             android:label="@string/title_activity_saved_quotes"></activity>
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

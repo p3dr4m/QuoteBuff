@@ -1,7 +1,6 @@
-package com.project.quotebuff;
+package com.project.quotebuff.presenter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import com.project.quotebuff.model.DBHelper;
+import com.project.quotebuff.model.Quotes;
+import com.project.quotebuff.R;
 
 import java.util.ArrayList;
 
@@ -33,8 +36,8 @@ public class QuotesListAdapter extends ArrayAdapter<Quotes> {
         TextView quote_author = (TextView) convertView.findViewById(R.id.quote_author);
         TextView quote_content = (TextView) convertView.findViewById(R.id.quote_content);
         // Populate the data into the template view using the data object
-        quote_author.setText(quotes.author);
-        quote_content.setText(quotes.content);
+        quote_author.setText(quotes.getAuthor());
+        quote_content.setText(quotes.getContent());
 
         Button save_btn = (Button) convertView.findViewById(R.id.save_quote_btn);
         Button delete_btn = (Button) convertView.findViewById(R.id.delete_quote_btn);

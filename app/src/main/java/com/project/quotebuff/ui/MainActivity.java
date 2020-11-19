@@ -1,4 +1,4 @@
-package com.project.quotebuff.activities;
+package com.project.quotebuff.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.project.quotebuff.DBHelper;
-import com.project.quotebuff.Quotes;
-import com.project.quotebuff.QuotesListAdapter;
+import com.project.quotebuff.model.DBHelper;
+import com.project.quotebuff.model.Quotes;
+import com.project.quotebuff.presenter.QuotesListAdapter;
 import com.project.quotebuff.R;
-import com.project.quotebuff.Utils;
+import com.project.quotebuff.model.Utils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

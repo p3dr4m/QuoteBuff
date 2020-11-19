@@ -1,4 +1,4 @@
-package com.project.quotebuff;
+package com.project.quotebuff.model;
 
 import android.content.Context;
 import android.util.Log;

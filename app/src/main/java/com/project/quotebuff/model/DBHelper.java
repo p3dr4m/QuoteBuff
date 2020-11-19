@@ -1,4 +1,4 @@
-package com.project.quotebuff;
+package com.project.quotebuff.model;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.project.quotebuff.model.Quotes;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void deleteQuote(Quotes quote) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_QUOTE_SAVE, KEY_ID + "=?", new String[]{quote._id});
+        db.delete(TABLE_QUOTE_SAVE, KEY_ID + "=?", new String[]{quote.get_id()});
         db.close();
     }
 

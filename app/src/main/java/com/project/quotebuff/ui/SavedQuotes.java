@@ -1,4 +1,4 @@
-package com.project.quotebuff.activities;
+package com.project.quotebuff.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.project.quotebuff.DBHelper;
-import com.project.quotebuff.Quotes;
-import com.project.quotebuff.QuotesListAdapter;
+import com.project.quotebuff.model.DBHelper;
+import com.project.quotebuff.model.Quotes;
+import com.project.quotebuff.presenter.QuotesListAdapter;
 import com.project.quotebuff.R;
 
 import androidx.annotation.NonNull;
