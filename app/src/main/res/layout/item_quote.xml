@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/quote_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="author"/>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/quote_content"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="content"/>
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp" />
 
-</LinearLayout>
+    <Button
+        android:layout_width="76dp"
+        android:layout_height="50dp"
+        android:layout_row="0"
+        android:layout_rowSpan="2"
+        android:layout_column="3"
+        android:layout_gravity="top"
+        android:text="@string/save" />
+
+    <TextView
+        android:id="@+id/quote_author"
+        android:layout_width="300dp"
+        android:layout_height="16dp"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+
+        />
+
+</GridLayout>
