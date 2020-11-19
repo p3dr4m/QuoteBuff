@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">QuoteBuff</string>
     <string name="save">Save</string>
+    <string name="delete">Delete</string>
     <string name="title_activity_saved_quotes">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_saved">Saved Quotes</string>

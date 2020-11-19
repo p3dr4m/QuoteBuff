@@ -35,8 +35,24 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addQuote(Quotes quote) {
+    public void deleteQuote(Quotes quote) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_QUOTE_SAVE, KEY_ID + "=?", new String[]{quote._id});
+        db.close();
+    }
 
+    public boolean getQuote(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_QUOTE_SAVE, new String[]{KEY_ID, KEY_AUTHOR, KEY_CONTENT},
+                KEY_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            return true;
+        else
+            return false;
+    }
+
+    public void addQuote(Quotes quote) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -48,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    ArrayList<Quotes> getAllQuotes() {
+    public ArrayList<Quotes> getAllQuotes() {
         ArrayList<Quotes> quotesList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT * FROM " + TABLE_QUOTE_SAVE;

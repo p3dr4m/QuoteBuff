@@ -9,6 +9,15 @@ public class Quotes {
     List<String> tags;
     String _id;
 
+    public Quotes() {
+    }
+
+    public Quotes(String id, String author, String content) {
+        this._id = id;
+        this.author = author;
+        this.content = content;
+    }
+
     public String get_id() {
         return _id;
     }
@@ -37,7 +46,7 @@ public class Quotes {
         this.content = content;
     }
 
-    public void setAuthor (String author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
