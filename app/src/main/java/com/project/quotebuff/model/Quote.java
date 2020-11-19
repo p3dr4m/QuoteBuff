@@ -2,17 +2,17 @@ package com.project.quotebuff.model;
 
 import java.util.List;
 
-public class Quotes {
+public class Quote {
     String content;
     String author;
     int length;
     List<String> tags;
     String _id;
 
-    public Quotes() {
+    public Quote() {
     }
 
-    public Quotes(String id, String author, String content) {
+    public Quote(String id, String author, String content) {
         this._id = id;
         this.author = author;
         this.content = content;

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.QuoteBuff">
         <activity
             android:name=".ui.SavedQuotes"
-            android:label="@string/title_activity_saved_quotes"></activity>
+            android:label="@string/title_activity_saved_quotes" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

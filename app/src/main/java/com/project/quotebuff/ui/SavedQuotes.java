@@ -3,18 +3,18 @@ package com.project.quotebuff.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.project.quotebuff.model.DBHelper;
-import com.project.quotebuff.model.Quotes;
-import com.project.quotebuff.presenter.QuotesListAdapter;
-import com.project.quotebuff.R;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.project.quotebuff.R;
+import com.project.quotebuff.model.QuoteSaveTable;
+import com.project.quotebuff.model.QuoteTable;
+import com.project.quotebuff.presenter.QuoteSaveAdapter;
 
 public class SavedQuotes extends AppCompatActivity {
 
@@ -22,14 +22,12 @@ public class SavedQuotes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_quotes);
-
-        DBHelper db = new DBHelper(this);
-        ArrayList<Quotes> quotesList =  db.getAllQuotes();
-
         final ListView listView = findViewById(R.id.quotes_list);
-        QuotesListAdapter adapter = new QuotesListAdapter(this, quotesList, R.layout.item_saved_quote);
+        QuoteSaveAdapter adapter = new QuoteSaveAdapter(
+                this,
+                R.layout.item_saved_quote,
+                new QuoteSaveTable(getApplicationContext()));
         listView.setAdapter(adapter);
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

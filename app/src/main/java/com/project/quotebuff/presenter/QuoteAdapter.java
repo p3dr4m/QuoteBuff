@@ -10,24 +10,33 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.project.quotebuff.model.DBHelper;
-import com.project.quotebuff.model.Quotes;
+import com.project.quotebuff.model.Quote;
 import com.project.quotebuff.R;
+import com.project.quotebuff.model.QuoteSaveTable;
+import com.project.quotebuff.model.QuoteTable;
 
 import java.util.ArrayList;
 
-public class QuotesListAdapter extends ArrayAdapter<Quotes> {
+public class QuoteAdapter extends ArrayAdapter<Quote> {
     int layout;
+    private final QuoteSaveTable quoteSaveTable;
+    private final QuoteTable quoteTable;
 
-    public QuotesListAdapter(@NonNull Context context, ArrayList<Quotes> quotes, int layout) {
-        super(context, 0, quotes);
+    public QuoteAdapter(
+            @NonNull Context context,
+            int layout,
+            QuoteSaveTable quoteSaveTable,
+            QuoteTable quoteTable) {
+        super(context, 0, quoteTable.getAllQuotes());
+        this.quoteSaveTable = quoteSaveTable;
         this.layout = layout;
+        this.quoteTable = quoteTable;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Quotes quotes = getItem(position);
+        Quote quote = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(this.layout, parent, false);
@@ -36,41 +45,25 @@ public class QuotesListAdapter extends ArrayAdapter<Quotes> {
         TextView quote_author = (TextView) convertView.findViewById(R.id.quote_author);
         TextView quote_content = (TextView) convertView.findViewById(R.id.quote_content);
         // Populate the data into the template view using the data object
-        quote_author.setText(quotes.getAuthor());
-        quote_content.setText(quotes.getContent());
+        quote_author.setText(quote.getAuthor());
+        quote_content.setText(quote.getContent());
 
         Button save_btn = (Button) convertView.findViewById(R.id.save_quote_btn);
-        Button delete_btn = (Button) convertView.findViewById(R.id.delete_quote_btn);
 
-        if (save_btn != null) {
-            save_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DBHelper db = new DBHelper(getContext());
-                    db.addQuote(quotes);
-                }
-            });
-        }
-
-
-        if (delete_btn != null) {
-            delete_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DBHelper db = new DBHelper(getContext());
-                    db.deleteQuote(quotes);
-                }
-            });
-        }
+        save_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quoteSaveTable.addQuote(quote);
+            }
+        });
 
 
         // Return the completed view to render on screen
         return convertView;
     }
 
-    void saveQuoteHandler(View v) {
-
-
+    public ArrayList<Quote> getAllSavedQuotes() {
+        return quoteSaveTable.getAllQuotes();
     }
 }
 

@@ -8,79 +8,64 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.project.quotebuff.model.Quotes;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class DBHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+public class DBHelper extends SQLiteOpenHelper implements IQuoteSaveTable, IQuoteTable {
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "QuoteBuffDB";
-    private static final String TABLE_QUOTE_SAVE = "quote_save";
-    private static final String KEY_ID = "id";
-    private static final String KEY_AUTHOR = "author";
-    private static final String KEY_CONTENT = "content";
+    private final Context context;
 
 
-    public DBHelper(@Nullable Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_QUOTE_SAVE_TABLE = String.format("CREATE TABLE %1s ( %2s TEXT PRIMARY KEY, %3s TEXT, %4s TEXT)", TABLE_QUOTE_SAVE, KEY_ID, KEY_AUTHOR, KEY_CONTENT);
+        String CREATE_QUOTE_SAVE_TABLE = String.format(
+                "CREATE TABLE %1s ( %2s TEXT PRIMARY KEY, %3s TEXT, %4s TEXT)",
+                TABLE_QUOTE_SAVE,
+                IQuoteSaveTable.KEY_ID,
+                IQuoteSaveTable.KEY_AUTHOR,
+                IQuoteSaveTable.KEY_CONTENT);
+        String CREATE_QUOTE_TABLE = String.format(
+                "CREATE TABLE %1s ( %2s TEXT PRIMARY KEY, %3s TEXT, %4s TEXT)",
+                TABLE_QUOTE,
+                IQuoteTable.KEY_ID,
+                IQuoteTable.KEY_AUTHOR,
+                IQuoteTable.KEY_CONTENT);
         db.execSQL(CREATE_QUOTE_SAVE_TABLE);
+        db.execSQL(CREATE_QUOTE_TABLE);
+        fillDatabaseWithData(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUOTE_SAVE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUOTE);
         onCreate(db);
     }
 
-    public void deleteQuote(Quotes quote) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_QUOTE_SAVE, KEY_ID + "=?", new String[]{quote.get_id()});
-        db.close();
-    }
+    private void fillDatabaseWithData(SQLiteDatabase db) {
+        String jsonFileString = Utils.getJsonFromAssets(context.getApplicationContext(), "quotes.json");
+        Gson gson = new Gson();
+        Type listQuotesType = new TypeToken<ArrayList<Quote>>() {
+        }.getType();
 
-    public boolean getQuote(String id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_QUOTE_SAVE, new String[]{KEY_ID, KEY_AUTHOR, KEY_CONTENT},
-                KEY_ID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            return true;
-        else
-            return false;
-    }
-
-    public void addQuote(Quotes quote) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Quote> quoteList = gson.fromJson(jsonFileString, listQuotesType);
+        assert quoteList != null;
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, quote.get_id());
-        values.put(KEY_AUTHOR, quote.getAuthor());
-        values.put(KEY_CONTENT, quote.getContent());
-
-        db.insert(TABLE_QUOTE_SAVE, null, values);
-        db.close();
-    }
-
-    public ArrayList<Quotes> getAllQuotes() {
-        ArrayList<Quotes> quotesList = new ArrayList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_QUOTE_SAVE;
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Quotes quote = new Quotes();
-                quote.set_id(cursor.getString(0));
-                quote.setAuthor(cursor.getString(1));
-                quote.setContent(cursor.getString(2));
-                // Adding contact to list
-                quotesList.add(quote);
-            } while (cursor.moveToNext());
-        }
-        return quotesList;
+        quoteList.forEach(quote -> {
+            values.put(IQuoteTable.KEY_ID, quote.get_id());
+            values.put(IQuoteTable.KEY_AUTHOR, quote.getAuthor());
+            values.put(IQuoteTable.KEY_CONTENT, quote.getContent());
+            db.insert(TABLE_QUOTE, null, values);
+        });
     }
 }
