@@ -29,11 +29,19 @@ public class Quotes {
         return author;
     }
 
-    public void setContent() {
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public void setAuthor () {
+    public void setAuthor (String author) {
         this.author = author;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 }

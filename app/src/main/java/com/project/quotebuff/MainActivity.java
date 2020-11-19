@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.quotes_list);
         QuotesListAdapter adapter = new QuotesListAdapter(this, quotesList);
         listView.setAdapter(adapter);
+        DBHelper db = new DBHelper(this);
+        db.getReadableDatabase();
 
     }
 
