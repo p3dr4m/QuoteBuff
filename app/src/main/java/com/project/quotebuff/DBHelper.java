@@ -51,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
     ArrayList<Quotes> getAllQuotes() {
         ArrayList<Quotes> quotesList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT  * FROM " + TABLE_QUOTE_SAVE;
+        String selectQuery = "SELECT * FROM " + TABLE_QUOTE_SAVE;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {

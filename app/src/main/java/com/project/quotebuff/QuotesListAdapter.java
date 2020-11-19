@@ -1,10 +1,12 @@
 package com.project.quotebuff;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,8 +32,24 @@ public class QuotesListAdapter extends ArrayAdapter<Quotes> {
         // Populate the data into the template view using the data object
         quote_author.setText(quotes.author);
         quote_content.setText(quotes.content);
+
+        Button btn = (Button) convertView.findViewById(R.id.save_quote_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper db = new DBHelper(getContext());
+                db.addQuote(quotes);
+            }
+        });
+
+
         // Return the completed view to render on screen
         return convertView;
+    }
+
+    void saveQuoteHandler(View v) {
+
+
     }
 }
 
