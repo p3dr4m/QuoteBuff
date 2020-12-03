@@ -15,7 +15,7 @@ public class Utils {
 
             int size = is.available();
             byte[] buffer = new byte[size];
-            is.read(buffer);
+            is.read(buffer)
             is.close();
 
             jsonString = new String(buffer, StandardCharsets.UTF_8);
