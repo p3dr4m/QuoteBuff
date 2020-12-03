@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 public class QuoteTable implements IQuoteTable {
-    Context context;
-    DBHelper dbHelper;
+    final Context context;
+    final DBHelper dbHelper;
     String[] allColumns = {KEY_ID, KEY_AUTHOR, KEY_CONTENT};
 
     public QuoteTable(Context context) {

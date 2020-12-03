@@ -1,0 +1,10 @@
+* 50749d0 add firebase, ui tests,
+* c2cfec7 MVP paradigm, instant refresh on delete, seeding db with quotes
+* e18dca3 mvp refactor
+* bff3557 save the quote to db and display, also del quote from save
+* 2c61af2 got it to save pog
+* 4566c61 navigation bar, save btn, list formatting
+* b302b2c database helper class, created table to save Quotes
+* adaaa77 display list of quotes with authors
+* c64475c parsed quotes data
+* 9ac40b2 init commit
