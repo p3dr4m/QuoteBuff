@@ -4,18 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class QuoteSaveTable implements IQuoteSaveTable {
-    Context context;
-    DBHelper dbHelper;
-    String[] allColumns = {KEY_ID, KEY_AUTHOR, KEY_CONTENT};
+    final Context context;
+    final DBHelper dbHelper;
+    final String[] allColumns = {KEY_ID, KEY_AUTHOR, KEY_CONTENT};
 
     public QuoteSaveTable(Context context) {
         this.context = context;
@@ -29,18 +24,6 @@ public class QuoteSaveTable implements IQuoteSaveTable {
         db.close();
     }
 
-    public boolean getQuote(String id) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(
-                TABLE_QUOTE_SAVE,
-                allColumns,
-                KEY_ID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            return true;
-        else
-            return false;
-    }
 
     public void addQuote(Quote quote) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -71,5 +54,20 @@ public class QuoteSaveTable implements IQuoteSaveTable {
         }
         cursor.close();
         return quoteList;
+    }
+
+    public boolean getQuote(String id) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_QUOTE_SAVE,
+                allColumns,
+                KEY_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null) {
+            cursor.close();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

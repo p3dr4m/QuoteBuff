@@ -18,9 +18,8 @@ import com.project.quotebuff.model.QuoteTable;
 import java.util.ArrayList;
 
 public class QuoteAdapter extends ArrayAdapter<Quote> {
-    int layout;
+    final int layout;
     private final QuoteSaveTable quoteSaveTable;
-    private final QuoteTable quoteTable;
 
     public QuoteAdapter(
             @NonNull Context context,
@@ -30,7 +29,6 @@ public class QuoteAdapter extends ArrayAdapter<Quote> {
         super(context, 0, quoteTable.getAllQuotes());
         this.quoteSaveTable = quoteSaveTable;
         this.layout = layout;
-        this.quoteTable = quoteTable;
     }
 
     @Override
@@ -42,21 +40,16 @@ public class QuoteAdapter extends ArrayAdapter<Quote> {
             convertView = LayoutInflater.from(getContext()).inflate(this.layout, parent, false);
         }
         // Lookup view for data population
-        TextView quote_author = (TextView) convertView.findViewById(R.id.quote_author);
-        TextView quote_content = (TextView) convertView.findViewById(R.id.quote_content);
+        TextView quote_author = convertView.findViewById(R.id.quote_author);
+        TextView quote_content = convertView.findViewById(R.id.quote_content);
         // Populate the data into the template view using the data object
         quote_author.setText(quote.getAuthor());
         quote_content.setText(quote.getContent());
 
-        Button save_btn = (Button) convertView.findViewById(R.id.save_quote_btn);
+        Button save_btn = convertView.findViewById(R.id.save_quote_btn);
         save_btn.setTag("btn" + position);
 
-        save_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                quoteSaveTable.addQuote(quote);
-            }
-        });
+        save_btn.setOnClickListener(v -> quoteSaveTable.addQuote(quote));
 
 
         // Return the completed view to render on screen

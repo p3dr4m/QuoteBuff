@@ -13,14 +13,13 @@ import androidx.annotation.NonNull;
 import com.project.quotebuff.R;
 import com.project.quotebuff.model.Quote;
 import com.project.quotebuff.model.QuoteSaveTable;
-import com.project.quotebuff.model.QuoteTable;
 
 import java.util.ArrayList;
 
 public class QuoteSaveAdapter extends ArrayAdapter<Quote> {
-    int layout;
+    final int layout;
     private final QuoteSaveTable quoteSaveTable;
-    ArrayList<Quote> quoteList;
+    final ArrayList<Quote> quoteList;
 
     public QuoteSaveAdapter(@NonNull Context context, int layout, QuoteSaveTable quoteSaveTable) {
         super(context, 0, quoteSaveTable.getAllQuotes());
@@ -38,8 +37,8 @@ public class QuoteSaveAdapter extends ArrayAdapter<Quote> {
             convertView = LayoutInflater.from(getContext()).inflate(this.layout, parent, false);
         }
         // Lookup view for data population
-        TextView quote_author = (TextView) convertView.findViewById(R.id.quote_author);
-        TextView quote_content = (TextView) convertView.findViewById(R.id.quote_content);
+        TextView quote_author = convertView.findViewById(R.id.quote_author);
+        TextView quote_content = convertView.findViewById(R.id.quote_content);
         // Populate the data into the template view using the data object
         quote_author.setText(quote.getAuthor());
         quote_content.setText(quote.getContent());
