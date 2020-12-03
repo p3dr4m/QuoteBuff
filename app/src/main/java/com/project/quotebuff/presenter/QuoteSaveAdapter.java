@@ -44,6 +44,7 @@ public class QuoteSaveAdapter extends ArrayAdapter<Quote> {
         quote_author.setText(quote.getAuthor());
         quote_content.setText(quote.getContent());
         Button delete_btn = convertView.findViewById(R.id.delete_quote_btn);
+        delete_btn.setTag("btn" + position);
         delete_btn.setOnClickListener(v -> deleteQuote(position));
 
         // Return the completed view to render on screen

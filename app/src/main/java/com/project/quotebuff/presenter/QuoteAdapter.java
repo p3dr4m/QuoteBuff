@@ -49,6 +49,7 @@ public class QuoteAdapter extends ArrayAdapter<Quote> {
         quote_content.setText(quote.getContent());
 
         Button save_btn = (Button) convertView.findViewById(R.id.save_quote_btn);
+        save_btn.setTag("btn" + position);
 
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override

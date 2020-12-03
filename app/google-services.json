@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "773675856567",
+    "project_id": "quotebuff",
+    "storage_bucket": "quotebuff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773675856567:android:ad0a0c7f25e5c3c5b39332",
+        "android_client_info": {
+          "package_name": "com.project.quotebuff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773675856567-g1kbhtdqgug1hp81tn7jhiqurd209tv4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPzHZ9L4kjpZyxrXRhpKvyziwtVzRXH5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773675856567-g1kbhtdqgug1hp81tn7jhiqurd209tv4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
